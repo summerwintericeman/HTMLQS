@@ -61,22 +61,26 @@ $(function () {
     //打印的结果表明二级数组的值发生了变化,slice和concat都不是深拷贝
     //********************************************************************************************************************
     //                                                判断一个变量是否是数组的办法
-    // let a = [1, 2];
-    // let b = {
-    //     name: 1,
-    //     arr: [1, 1,]
-    // };
-    // let c = 333;
-    // let i = new Number(1);
-    // let d = function () {
-    //     console.log('函数');
-    // }
-    // let e = 's';
-    // let j = new String('s');
-    // let f = null;
-    // let g;
-    // let h = true;
-    // let k = new Boolean(true);
+    let a = [1, 2];
+    var m = new Array()
+    m[0] = "0";
+    m[1] = "1";
+    m[2] = "2";
+    let b = {
+        name: 1,
+        arr: [1, 1,]
+    };
+    let c = 333;
+    let i = new Number(1);
+    let d = function () {
+        console.log('函数');
+    }
+    let e = 's';
+    let j = new String('s');
+    let f = null;
+    let g;
+    let h = true;
+    let k = new Boolean(true);
     // //instanceof 的判断办法
     // console.log(a instanceof Array);
     // console.log(b instanceof Array);
@@ -99,13 +103,15 @@ $(function () {
     //                                       封装一个办法实现判断传入变量的类型
     //js的数据类型  
     // function judgeType(change) {
-    //     console.log(typeof change)
     //     if (change == null) {
-    //         if (typeof change == 'object') {//null 也会被typeof判断为object类型
+    //         if(change === null){
     //             console.log('声明为null');
-    //         } else if(typeof change == 'undefined') {
-    //             console.log('undefined')
-    //             console.log("undefined或者没有传入值")
+    //         }else if(change === undefined){
+    //             if (arguments.length > 0) {
+    //                 console.log('undefined')
+    //             } else {
+    //                 console.log("没有传入值")
+    //             }
     //         }
     //     } else {
     //         if (change instanceof Object) {//万物皆对象，先判断是否是对象
@@ -133,6 +139,35 @@ $(function () {
     //         }
     //     }
     // }
+
+    // function judgeType(change) {
+    //     console.log(typeof change)
+    //     if (arguments.length == 0) {
+    //         return '0';//无参数传入
+    //     }
+    //     if (change === null) {
+    //         return 'null'
+    //     }
+    //     if (change === undefined && arguments.length > 0) {
+    //         return 'undefined'
+    //     }
+    //     if (change instanceof Function) {
+    //         return 'function'
+    //     }
+    //     if (change instanceof Array) {
+    //         return 'arry'
+    //     }
+    //     if (change instanceof Number || typeof change == 'number') {
+    //         return 'number'
+    //     }
+    //     if (change instanceof String || typeof change == 'string') {
+    //         return 'string'
+    //     }
+    //     if (change instanceof Boolean || typeof change == 'boolean') {
+    //         return 'boolean'
+    //     }
+    // }
+
     // judgeType(a);
     // judgeType(b);
     // judgeType(c);
@@ -146,9 +181,31 @@ $(function () {
     // judgeType(k);
     // judgeType();
     //********************************************************************************************************************
-    //                                                jq的extend方法                            
-
-
+    //                                                jq的extend方法             
+    //$.extend(参数1，参数2，参数3.......);
+    //参数1是否是深度合并 深度合并会递归的把所有的数据进行合并 参数2合并的目标对象也就是被修改的对象     参数3等是需要合并的对象参数           
+    // let object1 = {
+	// 	apple: 0,
+	// 	banana: { weight: 52, price: 100 },
+	// 	cherry: 97
+	// };
+	// let object2 = {
+	// 	banana: { price: 200 },
+	// 	durian: 100
+    // }; 
+    // let object3 = {
+	// 	banana: { ok: true },
+	// 	pay: false
+    // }; 
+    // $.extend(object1, object2 ,object3); 
+    // $.extend( true, object1, object2 ,object3);
+    // let object4 = $.extend({},object1, object2 ,object3);
+    // let object5 = $.extend(true,{},object1, object2 ,object3);
+    // console.log(object1);
+    // console.log(object2);
+    // console.log(object3);
+    // console.log(object4);
+    // console.log(object5);
 
 
 
