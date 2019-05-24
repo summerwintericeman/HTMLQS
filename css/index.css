@@ -61,6 +61,7 @@
 .center{
     height: 50px;
     width: 50px;
+    background-color: aqua;
 }
 
 /* 实现水平垂直居中的办法 */
@@ -82,6 +83,3 @@
     transform: translate(-50%, -50%);
 } */
 
-.center{
-    background-color: aqua;
-} 
