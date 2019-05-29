@@ -937,51 +937,122 @@ $(function () {
     // 写一个函数，该函数实现的功能是：100元给10个人发红包，红包大小随机，每个人都能得到红包。
     // 分析 每个人都需要有至少0.01 考虑到浮点数的运算比较麻烦 统一处理成100倍 在处理为小数点后两位
     // 获取大于0的随机数的方法
-    function randomFn() {
-        let random = Math.random();
-        if (random == 0) {
-            randomFn();
-        } else {
-            return random;
+    // function randomFn() {
+    //     var random = Math.random();
+    //     if (random == 0) {
+    //         randomFn();
+    //     } else {
+    //         // console.log(random)
+    //         return random;
+    //     }
+    // }
+    // // 红包金额的确定精确到小数点后两位
+    // // function redPacket(moneyLeft, num) {//参数是金额和人数  金额是保留两位有效数字的浮点数
+    // //     if (moneyLeft * 100 < num) {
+    // //         console.log("金额不足以每人0.01")
+    // //     }
+    // //     if (moneyLeft * 100 == num) {//剩余金额只能每人0.01时
+    // //         return 0.01;
+    // //     } else {
+    // //         console.log("ss")
+    // //         var random1 = randomFn();
+    // //         // console.log(random1)
+    // //         var tempMoney = parseInt(moneyLeft * 100 * random1) / 100;
+    // //         // 随机的金额不能全部占完所有的资源至少每位0.01 也不能为0 
+    // //         if (tempMoney == 0 || (moneyLeft * 100 - tempMoney * 100 < num - 1)) {
+    // //             console.log('xx');
+    // //             redPacket(moneyLeft, num);               
+    // //         } else {
+    // //             console.log(tempMoney)
+    // //             return tempMoney;
+    // //         }
+    // //     }
+    // // };
+    // function redPacket(moneyLeft, num) {//参数是金额和人数  金额是保留两位有效数字的浮点数
+    //     if (moneyLeft * 100 < num) {
+    //         console.log("金额不足以每人0.01")
+    //     }
+    //     if (moneyLeft * 100 == num) {//剩余金额只能每人0.01时
+    //         return 0.01;
+    //     } else {
+    //         var random1 = randomFn();
+    //         console.log(moneyLeft)
+    //         console.log(random1)
+    //         var tempMoney = parseInt(moneyLeft * 100 * random1) / 100;
+    //         console.log(tempMoney)
+    //         // 随机的金额不能全部占完所有的资源至少每位0.01 也不能为0 
+    //         if (tempMoney == 0) {
+    //             return 0.01;
+    //         }
+    //         if (moneyLeft * 100 - tempMoney * 100 < num - 1) {
+    //             return (moneyLeft * 100 - num)/100;
+    //         } else {
+    //             return tempMoney;
+    //         }
+    //     }
+    // };
+    // // 实现人数金额输入返回结果
+    // var arr = [];
+    // function happy(money, randomMoney, num) {//总金额  随机出去的总金额  随机剩余的数量   
+    //     // console.log(randomMoney)
+    //     if (num > 1) {
+    //         // console.log(redPacket((money * 100 - randomMoney * 100) / 100, num))
+    //         var cutMoeny = redPacket((money * 100 - randomMoney * 100) / 100, num);//本次随机的金额
+    //         arr.push(cutMoeny);
+    //         randomMoney = (randomMoney * 100 + cutMoeny * 100) / 100;//随机出去的总金额
+    //         happy(money, randomMoney, num - 1)
+    //     } else if (num == 1) {
+    //         // 需要考虑总和的确定和浮点数的运算 
+    //         arr.push(parseInt(money * 100 - randomMoney * 100) / 100)  //没有进行浮点数的运算处理
+    //     }
+    // }
+    // happy(10, 0, 5);
+    // console.log(arr)
+    function randomleft(leftMoney, leftNum) {
+        // 函数返回一个随机值
+        var randomX = parseInt(Math.random() * leftMoney);
+        if (randomX == 0) {
+            randomX = 1;
+        }
+        if (leftMoney < (randomX + leftNum - 1)) {
+            randomX = leftMoney - leftNum + 1;
+        }
+        return randomX;
+    }
+    function bigSmall(num) {
+        if (num < 10) {
+            return "0.0" + num;
+        }
+        if (10 < num && num < 100) {
+            return "0." + num;
+        }
+        if (100 < num ) {
+            return parseInt(num/100) + '.' + parseInt((num%100)/10) +  parseInt(num%10);
         }
     }
-    // 红包金额的确定精确到小数点后两位
-    function redPacket(money, num) {//参数是金额和人数
-        if(money*100 == num){//剩余金额只能每人0.01时
-            return 0.01;
-        }
-        let random = randomFn();
-        let tempMoney = parseInt(money * 100 * random) / 100;
-        // 随机的金额不能全部占完所有的资源至少每位0.01 也不能为0 
-        if (tempMoney == 0 || parseInt(money * 100 - tempMoney * 100) < num) {
-            redPacket(money, num);
-        } else {
-            console.log(tempMoney)
-            return tempMoney;
-        }
-    };
-    // 实现人数金额输入返回结果
-    let arr = [];
-    function happy(money, randomMoney, num) {//总金额  随机出去的总金额  随机剩余的数量   
-        console.log(money)    
-        console.log(randomMoney)
-        console.log(num) 
-        if (num > 1) {
-            let cutMoeny = redPacket(parseInt((money * 100 - randomMoney * 100)) / 100, num);//本次随机的金额
-            arr.push(cutMoeny);
-            randomMoney = randomMoney + cutMoeny;//随机出去的总金额
-            happy(money, randomMoney, num - 1)
-        } else if (num == 1) {
-            // 需要考虑总和的确定和浮点数的运算 
-            arr.push(parseInt(money * 100 - randomMoney * 100) / 100)  //没有进行浮点数的运算处理
+    var arr = [];
+    function happy(money, num) {
+        var left = 0;
+        var leftMoney = 0;
+        for (var i = num; i > 0; i--) {
+            leftMoney = money * 100 - left;
+            if (i == 1) {//最后一个
+                arr.push(bigSmall(leftMoney))
+            } else {
+                var red = randomleft(leftMoney, i);
+                arr.push(bigSmall(red))
+                left = left + red;
+            }
         }
     }
-    happy(0.03, 0, 2);
+    happy(10, 2);
+    var last = 0;
+    for (var j = 0; j < arr.length; j++) {
+        console.log(Number(arr[j]));
+        last = last + Number(arr[j])*100;
+    }
+    console.log(last)
     console.log(arr)
-
-
-
-
     //****************************************************************************************************************************************************************************************************************************************
     //****************************************************************************************************************************************************************************************************************************************
     //****************************************************************************************************************************************************************************************************************************************
