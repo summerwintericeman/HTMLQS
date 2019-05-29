@@ -675,10 +675,54 @@ $(function () {
     // 不同的请求都有自己的jsonp文档
 
     //****************************************************************************************************************************************************************************************************************************************
-    //                                                           ajax
+    //                                                            ajax
+    // 手写ajax 
+    // 首先来看一个例子
+    // var xhr = new XMLHttpRequest();//创建对象
+    // xhr.open("GET", "./static/file.txt", true);//请求路径 方法 和 同步异步参数 
+    // xhr.onload = function (e) {
+    //     if (xhr.readyState === 4) {
+    //         if (xhr.status === 200) {
+    //             console.log(xhr.responseText);
+    //         } else {
+    //             console.error(xhr.statusText);
+    //         }
+    //     }
+    // };
+    // xhr.onerror = function (e) {
+    //     console.error(xhr.statusText);
+    // };
+    // xhr.send(null);
+    // 这里还有问题  XMLHttpRequest的对象在IE上也以偶兼容的问题
+    //1.创建兼容的XMLHttpRequest对象 XMLHttpRequestOBJ    
+    // function XMLHttpRequestOBJ() {
+    //     var xmlHttpRequest;
+    //     if (window.XMLHttpRequest) {
+    //         //针对FireFox，Mozillar，Opera，Safari，IE7，IE8     
+    //         xmlHttpRequest = new XMLHttpRequest();//针对某些特定版本的mozillar浏览器的BUG进行修正     
+    //         if (xmlHttpRequest.overrideMimeType) {
+    //             xmlHttpRequest.overrideMimeType("text/xml");
+    //         }
+    //     } else if (window.ActiveXObject) {//针对IE6，IE5.5，IE5     //两个可以用于创建XMLHTTPRequest对象的控件名称，保存在一个js的数组中  //排在前面的版本较新     
+    //         var activexName = ["MSXML2.XMLHTTP", "Microsoft.XMLHTTP"];
+    //         for (var i = 0; i < activexName.length; i++) {
+    //             try {
+    //                 //取出一个控件名进行创建，如果创建成功就终止循环     
+    //                 //如果创建失败，回抛出异常，然后可以继续循环，继续尝试创建     
+    //                 xmlHttpRequest = new ActiveXObject(activexName[i]);
+    //                 if (xmlHttpRequest) {
+    //                     break;
+    //                 }
+    //             } catch (e) {
+    //             }
+    //         }
+    //     }
+    //     return xmlHttpRequest;
+    // }
+    //****************************************************************************************************************************************************************************************************************************************
+    //                                                     混合app和嵌套app
 
-
-
+    
 
 
 
