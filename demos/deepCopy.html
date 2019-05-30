@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>摄拷贝和浅拷贝</title>
+</head>
+<style>
+
+</style>
+
+<body>
+
+    <h3> 深拷贝和浅拷贝的区别</h3>
+    <p>出现深拷贝浅拷贝的原因： </p>
+    <p> 1、基础类型：像Number、String、Boolean等这种为基本类型</p>
+    <p> 2、引用类型：Object和Array等 </p>
+    <p>基础数据类型在复制的时候，会重新开辟一块内存用来存储新的值，所以每次复制所代表的内存位置是不同的</p>
+    <p>引用数据类型存储的指向某个内存位置的指针，因此一般的复制，只是复制了指针，还是用的同一块内存下的值</p>
+    <p>浅拷贝只是复制了对象的引用地址，两个对象指向同一个内存地址，所以修改其中任意的值，另一个值都会随之变化，这就是浅拷贝</p>
+    <p>深拷贝是将对象及值复制过来，两个对象修改其中任意的值另一个值不会改变，这就是深拷贝</p>
+    <h3>实现深拷贝的三种办法</h3>
+    <p>递归拷贝</p>
+    <p>jq.extend方法</p>
+    <p>JSON.stringfy和JSON.parse</p>
+    <p>具体操作看文件js代码</p>
+</body>
+<script src="../js/jquery-3.1.0.min.js"></script>
+<script>
+    $(function () {
+        //  浅拷贝的效果
+        let list1 = [1, 2, 3, 4],
+            list2 = list1;
+        list1[0] = 2;//修改原始对象后发现拷贝后的对象的值也会被修改
+        console.log(list1);
+        console.log(list2);
+        //   深拷贝的实现的三种办法
+        //     递归方法实现深拷贝
+        function deepClone(obj) {
+            let objClone = Array.isArray(obj) ? [] : {};//判断对象是否是数组不是则设置为对象   objClone是克隆出来的新数据 obj是被克隆的模板数据
+            if (obj && typeof obj === "object") {//判断要被拷贝的数据是否存在
+                for (key in obj) {//循环数据
+                    if (obj.hasOwnProperty(key)) {//判断对象自身属性中是否具有指定的属相 返回一个布尔值  --这里表示你的key值是必须存在的                   
+                        if (obj[key] && typeof obj[key] === "object") {//判断ojb子元素是否为对象，如果是，递归复制
+                            objClone[key] = deepClone(obj[key]);//传入子元素的value值
+                        } else {//如果子元素是简单值只需要直接赋值就可以
+                            objClone[key] = obj[key];
+                        }
+                    }
+                }
+            }
+            return objClone;
+        }
+        let a = [1, 2, 3, 4],
+            b = deepClone(a);
+        a[0] = 2;
+        console.log(a, b);
+    })
+    // JSON对象的parse和stringfy
+    let list3 = [1, 2, 3, 4];
+    list4 = JSON.parse(JSON.stringify(list3));
+    list3[0] = 2;
+    console.log(list3, list4);
+    //   jq的extend实现深拷贝
+    let list5 = [0, 1, [2, 3], 4],
+        list6 = $.extend(true, [], list5);
+    list5[0] = 1;
+    list5[2][0] = 1;
+    console.log(list5, list6);
+    //                   额外补充： 方法slice 和concat 是否是深拷贝的讨论 主要看是否是不是拷贝了所有的层级
+    //slice的测试
+    // let a = [0, 1, [2, 3], 4],
+    //     b = a.slice();
+    // a[0] = 1;
+    // a[2][0] = 1;
+    // console.log(a);
+    // console.log(b);
+    //concat的测试
+    // let a = [0, 1, [2, 3], 4],
+    //     b = a.concat();
+    // a[0] = 1;
+    // a[2][0] = 1;
+    // console.log(a);
+    // console.log(b);
+    //打印的结果表明二级数组的值发生了变化,slice和concat都不是深拷贝
+</script>
+
+</html>
