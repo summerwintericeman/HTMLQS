@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>判断数据类型的方法</title>
+</head>
+
+<body>
+    <h3>判断数据类型的方法</h3>
+    <p>判断是否是一个数组</p>
+    <p>instanceof && isArray()</p>
+    <p>instanceof</p>
+    <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/instanceof">MDN地址</a>
+    <p>instanceof运算符用于测试构造函数的prototype属性是否出现在对象的原型链中的任何位置也就是说可以判断一个对象是否是一个对象的实例</p>
+    <p>用法： object instanceof constructor</p>
+    <p>判断是否是数组: arr instanceof Array</p>
+    <p>返回一个布尔值</p>
+    <p>isArray()</p>
+    <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray">MDN地址</a>
+    <p>isArray() 方法用于判断一个对象是否为数组。如果对象是数组返回 true，否则返回 false。</p>
+    <p>Array.isArray(obj)</p>
+
+    <p>具体的测试见js部分</p>
+    <p>封装一个传入参数判断是什么数据类型的函数见js</p>
+
+
+</body>
+<script src="../js/jquery-3.1.0.min.js"></script>
+<script>
+    $(function () {
+        //                                                判断一个变量是否是数组的办法
+        let a = [1, 2];
+        var m = new Array()
+        m[0] = "0";
+        m[1] = "1";
+        m[2] = "2";
+        let b = {
+            name: 1,
+            arr: [1, 1,]
+        };
+        let c = 333;
+        let i = new Number(1);
+        let d = function () {
+            console.log('函数');
+        }
+        let e = 's';
+        let j = new String('s');
+        let f = null;
+        let g;
+        let h = true;
+        let k = new Boolean(true);
+        //instanceof 的判断办法
+        console.log(a instanceof Array);
+        console.log(b instanceof Array);
+        console.log(c instanceof Array);
+        console.log(d instanceof Array);
+        console.log(e instanceof Array);
+        console.log(f instanceof Array);
+        console.log(g instanceof Array);
+        console.log(h instanceof Array);
+        // isArray()办法
+        console.log(Array.isArray(a))
+        console.log(Array.isArray(b))
+        console.log(Array.isArray(c))
+        console.log(Array.isArray(d))
+        console.log(Array.isArray(e))
+        console.log(Array.isArray(f))
+        console.log(Array.isArray(g))
+        console.log(Array.isArray(h))
+
+        //                                       封装一个办法实现判断传入变量的类型
+        //js的数据类型  
+        // function judgeType(change) {//分解版
+        //     if (change == null) {
+        //         if(change === null){
+        //             console.log('声明为null');
+        //         }else if(change === undefined){
+        //             if (arguments.length > 0) {
+        //                 console.log('undefined')
+        //             } else {
+        //                 console.log("没有传入值")
+        //             }
+        //         }
+        //     } else {
+        //         if (change instanceof Object) {//万物皆对象，先判断是否是对象
+        //             if (change instanceof Array) {//数组也是会被判定为object
+        //                 console.log('Array')
+        //             } else if (change instanceof Function) {//函数也会被判断为object
+        //                 console.log('Function')
+        //             } else if (change instanceof Number) {
+        //                 console.log('new方法声明的Number')
+        //             } else if (change instanceof String) {
+        //                 console.log('new方法声明的String')
+        //             } else if (change instanceof Boolean) {
+        //                 console.log('new方法声明的Boolean')
+        //             } else {
+        //                 console.log('Object')
+        //             }
+        //         } else {//instanceof判断一个对象是否是另一个对象的实例，而数字1是基本数据类型，不是对象 对于某些实例类型的声明无法判断
+        //             if (typeof change == 'number') {
+        //                 console.log('字面量方式声明的Number')
+        //             } else if (typeof change == 'string') {
+        //                 console.log('字面量方式声明的String')
+        //             } else if (typeof change == 'boolean') {
+        //                 console.log('字面量方式声明的Boolean')
+        //             }
+        //         }
+        //     }
+        // }
+
+        function judgeType(change) {//实用版
+            console.log(typeof change)
+            if (arguments.length == 0) {
+                return '0';//无参数传入
+            }
+            if (change === null) {
+                return 'null'
+            }
+            if (change === undefined && arguments.length > 0) {
+                return 'undefined'
+            }
+            if (change instanceof Function) {
+                return 'function'
+            }
+            if (change instanceof Array) {
+                return 'arry'
+            }
+            if (change instanceof Number || typeof change == 'number') {
+                return 'number'
+            }
+            if (change instanceof String || typeof change == 'string') {
+                return 'string'
+            }
+            if (change instanceof Boolean || typeof change == 'boolean') {
+                return 'boolean'
+            }
+        }
+
+        judgeType(a);
+        judgeType(b);
+        judgeType(c);
+        judgeType(i);
+        judgeType(d);
+        judgeType(e);
+        judgeType(j);
+        judgeType(f);
+        judgeType(g);
+        judgeType(h);
+        judgeType(k);
+        judgeType();
+
+
+
+
+    })
+
+
+</script>
+
+</html>

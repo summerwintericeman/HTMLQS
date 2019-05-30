@@ -7,6 +7,7 @@ html{
 }
 body{
     font-size: 0.12rem;
+    padding: 0.1rem;
 }
 h3.demo{
     text-align: center;
@@ -14,8 +15,19 @@ h3.demo{
 }
 a{
     text-decoration: none;
+    line-height: 0.25rem;
+    display: block;
+    width: 100%;
+    height: 0.25rem;
 }
-.div1 {
+
+
+
+
+
+
+
+/* .div1 {
     background: #000080;
     border: 1px solid red;
 }
@@ -39,7 +51,7 @@ a{
     width: 30%;
     height: 80px;
     background: #DDD
-}
+} */
 
 
 /*清除浮动代码*/
@@ -65,7 +77,7 @@ a{
     clear: both
 } */
 
-.box{
+/* .box{
     border: 1px solid red;
     height: 200px;
     width: 200px;
@@ -79,7 +91,7 @@ a{
     height: 50px;
     width: 50px;
     background-color: aqua;
-}
+} */
 
 /* 实现水平垂直居中的办法 */
 /* 知道居中元素的尺寸的情况下可以使用margin输入具体的值 */

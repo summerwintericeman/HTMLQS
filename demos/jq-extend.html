@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jq.extend方法</title>
+</head>
+
+<body>
+    <h3>jq.extend方法</h3>
+    <p>jQuery.extend() 函数用于将一个或多个对象的内容合并到目标对象。 </p>
+    <p>测试见js部分</p>
+
+</body>
+<script src="../js/jquery-3.1.0.min.js"></script>
+<script>
+    $(function () {
+        //                                                jq的extend方法             
+        //$.extend(参数1，参数2，参数3.......);
+        //参数1是否是深度合并 深度合并会递归的把所有的数据进行合并 参数2合并的目标对象也就是被修改的对象     参数3等是需要合并的对象参数           
+        let object1 = {
+            apple: 0,
+            banana: { weight: 52, price: 100 },
+            cherry: 97
+        };
+        let object2 = {
+            banana: { price: 200 },
+            durian: 100
+        };
+        let object3 = {
+            banana: { ok: true },
+            pay: false
+        };
+        $.extend(object1, object2, object3);
+        $.extend(true, object1, object2, object3);
+        let object4 = $.extend({}, object1, object2, object3);
+        let object5 = $.extend(true, {}, object1, object2, object3);
+        console.log(object1);
+        console.log(object2);
+        console.log(object3);
+        console.log(object4);
+        console.log(object5);
+    })
+</script>
+
+</html>
